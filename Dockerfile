@@ -12,9 +12,9 @@ FROM python:3.8-slim
 
 # Install Amazon Corretto JDK 11
 RUN apt-get update && \
-    apt-get install -y --no-install-recommends wget curl && \
+    apt-get install -y --no-install-recommends wget curl gnupg && \
     wget -O- https://apt.corretto.aws/corretto.key | apt-key add - && \
-    add-apt-repository 'deb https://apt.corretto.aws stable main' && \
+    echo "deb https://apt.corretto.aws stable main" | tee /etc/apt/sources.list.d/corretto.list && \
     apt-get update && \
     apt-get install -y java-11-amazon-corretto-jdk && \
     apt-get clean && \
